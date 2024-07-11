@@ -7,6 +7,6 @@ import { EditarComponent } from './editar/editar.component';
 export const routes: Routes = [
     { path: "", component: PeliculasComponent },
     { path: "administrar", component: ListarComponent},
-    { path: "administrar/crear/:id_pelicula", component: CrearComponent},
+    { path: "administrar/crear", component: CrearComponent},
     { path: "administrar/editar/:id_pelicula", component: EditarComponent},
 ];
