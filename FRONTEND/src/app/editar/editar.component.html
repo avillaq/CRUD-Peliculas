@@ -32,9 +32,9 @@
         <div class="mb-5">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Generos</label>
             <select multiple name="genres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required formControlName="genres">
-                <option value="2">Crime</option>
-                <option value="4">Drama</option>
-                <option value="2">Action</option>
+                @for (gen of generos; track $index) {
+                    <option value="{{gen.id}}">{{gen.name}}</option>
+                }
               </select>
         </div>
         <label class="inline-flex items-center mb-5 cursor-pointer">

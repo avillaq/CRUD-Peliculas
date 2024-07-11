@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import { PeliculasService } from '../peliculas.service';
+import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-crear',
@@ -20,7 +21,10 @@ export class CrearComponent implements OnInit {
     inTheaters : new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router) { }
+  generos: any = [];
+
+
+  constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router, private generosService:GenerosService) { }
 
   ngOnInit() {
     this.formulario = this.formBuilder.group({
@@ -31,6 +35,11 @@ export class CrearComponent implements OnInit {
       genres: ['', Validators.required],
       inTheaters: [false], // Valor predeterminado en false y sin Validators.required
     });
+    this.generosService.getGeneros().subscribe(
+      (response:any) => {
+        console.log(response);
+        this.generos = response
+      }); 
   }
 
   onSubmit(): void {

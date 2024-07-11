@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import { PeliculasService } from '../peliculas.service';
+import { GenerosService } from '../generos.service';
+
 
 @Component({
   selector: 'app-editar',
@@ -12,6 +14,7 @@ import { PeliculasService } from '../peliculas.service';
 })
 export class EditarComponent implements OnInit{
   @Input("id_pelicula") id_pelicula: number = 0; 
+  generos: any = [];
   
   formulario: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -23,9 +26,16 @@ export class EditarComponent implements OnInit{
   });
 
 
-  constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router) { }
+
+  constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router, private generosService:GenerosService) { }
 
   ngOnInit() {
+    this.generosService.getGeneros().subscribe(
+      (response:any) => {
+        console.log(response);
+        this.generos = response
+      }); 
+      
     this.peliculasService.getPelicula(this.id_pelicula).subscribe(
       (response:any) => {
         console.log(response);
