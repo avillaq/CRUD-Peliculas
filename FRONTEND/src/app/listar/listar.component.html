@@ -40,10 +40,10 @@
                             {{peli.rating}}
                         </td>
                         <td class="px-6 py-4">
-                            <a [routerLink]="['/administrar/editar',5]"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2">Edit</a>
-                            <a [routerLink]="['/administrar/editar',5]"
-                                class="font-medium text-red-600 dark:text-red-500 hover:underline ml-2">Remove</a>
+                            <a [routerLink]="['/administrar/editar',peli.id]"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2">Editar</a>
+                            <a [routerLink]="['/administrar/editar',peli.id]"
+                                class="font-medium text-red-600 dark:text-red-500 hover:underline ml-2">Eliminar</a>
                         </td>
                     </tr>
                 }

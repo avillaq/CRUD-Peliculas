@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import { PeliculasService } from '../peliculas.service';
-import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-crear',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './crear.component.html',
   styleUrl: './crear.component.css'
 })
