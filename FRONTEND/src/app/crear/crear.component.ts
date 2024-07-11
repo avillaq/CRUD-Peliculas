@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import { PeliculasService } from '../peliculas.service';
+import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-crear',
@@ -54,7 +55,7 @@ export class CrearComponent implements OnInit {
         }
       );
     } else {
-      alert("Por favor, llena todos los campos");
+      alert("Algo salió mal, verifica los datos ingresados.");
     }
   }
 
