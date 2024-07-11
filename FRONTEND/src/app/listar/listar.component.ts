@@ -10,8 +10,8 @@ import { GenerosService } from '../generos.service';
   templateUrl: './listar.component.html',
   styleUrl: './listar.component.css'
 })
-export class ListarComponent implements OnInit{
-  constructor(private peliculasService: PeliculasService, private generosService:GenerosService) { }
+export class ListarComponent implements OnInit {
+  constructor(private peliculasService: PeliculasService, private generosService: GenerosService) { }
 
   peliculas: any = [];
   generos: any = [];
@@ -32,11 +32,20 @@ export class ListarComponent implements OnInit{
     );
   }
 
-  getListaNombreGeneros(idGeneros : []): string {
+  getListaNombreGeneros(idGeneros: []): string {
     let generos = "";
-    idGeneros.forEach((id:number) => {
-      generos += this.generos.find((generoObj:any) => generoObj.id == id).name + ", ";
+    idGeneros.forEach((id: number) => {
+      generos += this.generos.find((generoObj: any) => generoObj.id == id).name + ", ";
     });
     return generos.slice(0, -2);
+  }
+
+  eliminarPelicula(id: number) {
+    if (confirm("¿Está seguro de eliminar la película?")) {
+      this.peliculasService.eliminarPelicula(id).subscribe(
+        (response) => {
+          this.peliculas = this.peliculas.filter((pelicula: any) => pelicula.id != id);
+        })
+    }
   }
 }

@@ -16,4 +16,10 @@ export class PeliculasService {
   crearPelicula(pelicula: any) {
     return this.http.post("http://127.0.0.1:8000/api/movies/", pelicula);
   }
+  editarPelicula(pelicula: any, id: number) {
+    return this.http.put("http://127.0.0.1:8000/api/movies/"+ id + "/", pelicula);
+  }
+  eliminarPelicula(id: number) {
+    return this.http.delete("http://127.0.0.1:8000/api/movies/"+ id + "/");
+  }
 }
