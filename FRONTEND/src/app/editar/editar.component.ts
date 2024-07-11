@@ -26,31 +26,30 @@ export class EditarComponent implements OnInit{
   });
 
 
-
   constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router, private generosService:GenerosService) { }
 
   ngOnInit() {
     this.generosService.getGeneros().subscribe(
       (response:any) => {
-        console.log(response);
         this.generos = response
       }); 
-      
+
     this.peliculasService.getPelicula(this.id_pelicula).subscribe(
       (response:any) => {
-        console.log(response);
-
         this.formulario = this.formBuilder.group({
           name: [response.name, Validators.required],
           description: [response.description, Validators.required],
           image: [response.image, Validators.required],
           rating: [response.rating, Validators.required],
           genres: [response.genres, Validators.required],
-          inTheaters: [response.inTheaters], // Valor predeterminado en false y sin Validators.required
+          inTheaters: [response.inTheaters],
         });
         
       }
     );
+  }
+  isSelected(id:number){
+    return this.formulario.value.genres.includes(id);
   }
 
   onSubmit(): void {
@@ -66,10 +65,8 @@ export class EditarComponent implements OnInit{
       };
       
       alert("Pelicula actualizada!");
-      this.peliculasService.crearPelicula(pelicula).subscribe(
+      this.peliculasService.editarPelicula(pelicula, this.id_pelicula).subscribe(
         (response) => {
-          console.log(response);
-          
           this.router.navigate(['/administrar']);
         }
       );
