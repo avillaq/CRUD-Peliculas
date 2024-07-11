@@ -48,7 +48,9 @@ export class CrearComponent implements OnInit {
       alert("Boletos Comprados Exitosamente!");
       this.peliculasService.crearPelicula(pelicula).subscribe(
         (response) => {
-          this.router.navigate(['/']); // Redirige al inicio
+          console.log(response);
+          
+          this.router.navigate(['/administrar']);
         }
       );
     } else {
