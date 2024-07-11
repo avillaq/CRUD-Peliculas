@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import { PeliculasService } from '../peliculas.service';
@@ -10,7 +10,9 @@ import { PeliculasService } from '../peliculas.service';
   templateUrl: './editar.component.html',
   styleUrl: './editar.component.css'
 })
-export class EditarComponent {
+export class EditarComponent implements OnInit{
+  @Input("id_pelicula") id_pelicula: number = 0; 
+  
   formulario: FormGroup = new FormGroup({
     name: new FormControl(''),
     description : new FormControl(''),
@@ -20,17 +22,25 @@ export class EditarComponent {
     inTheaters : new FormControl(''),
   });
 
+
   constructor(private formBuilder: FormBuilder, private peliculasService: PeliculasService, private router: Router) { }
 
   ngOnInit() {
-    this.formulario = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      image: ['', Validators.required],
-      rating: ['', Validators.required],
-      genres: ['', Validators.required],
-      inTheaters: [false], // Valor predeterminado en false y sin Validators.required
-    });
+    this.peliculasService.getPelicula(this.id_pelicula).subscribe(
+      (response:any) => {
+        console.log(response);
+
+        this.formulario = this.formBuilder.group({
+          name: [response.name, Validators.required],
+          description: [response.description, Validators.required],
+          image: [response.image, Validators.required],
+          rating: [response.rating, Validators.required],
+          genres: [response.genres, Validators.required],
+          inTheaters: [response.inTheaters], // Valor predeterminado en false y sin Validators.required
+        });
+        
+      }
+    );
   }
 
   onSubmit(): void {
@@ -45,7 +55,7 @@ export class EditarComponent {
         inTheaters: this.formulario.value.inTheaters,
       };
       
-      alert("Boletos Comprados Exitosamente!");
+      alert("Pelicula actualizada!");
       this.peliculasService.crearPelicula(pelicula).subscribe(
         (response) => {
           console.log(response);

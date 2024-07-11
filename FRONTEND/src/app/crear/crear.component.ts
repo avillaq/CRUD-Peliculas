@@ -45,7 +45,7 @@ export class CrearComponent implements OnInit {
         inTheaters: this.formulario.value.inTheaters,
       };
       
-      alert("Boletos Comprados Exitosamente!");
+      alert("Pelicula añadida Exitosamente!");
       this.peliculasService.crearPelicula(pelicula).subscribe(
         (response) => {
           console.log(response);
