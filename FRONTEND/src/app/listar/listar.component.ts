@@ -20,7 +20,6 @@ export class ListarComponent implements OnInit{
     this.generosService.getGeneros().subscribe(
       (response) => {
         this.generos = response;
-        console.log(this.generos);
       }
     );
 
@@ -31,5 +30,13 @@ export class ListarComponent implements OnInit{
         console.log(this.peliculas);
       }
     );
+  }
+
+  getListaNombreGeneros(idGeneros : []): string {
+    let generos = "";
+    idGeneros.forEach((id:number) => {
+      generos += this.generos.find((generoObj:any) => generoObj.id == id).name + ", ";
+    });
+    return generos.slice(0, -2);
   }
 }
