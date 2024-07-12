@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PeliculasService } from '../peliculas.service';
-import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-listar',
@@ -11,18 +10,11 @@ import { GenerosService } from '../generos.service';
   styleUrl: './listar.component.css'
 })
 export class ListarComponent implements OnInit {
-  constructor(private peliculasService: PeliculasService, private generosService: GenerosService) { }
+  constructor(private peliculasService: PeliculasService) { }
 
   peliculas: any = [];
-  generos: any = [];
 
   ngOnInit() {
-    this.generosService.getGeneros().subscribe(
-      (response) => {
-        this.generos = response;
-      }
-    );
-
     this.peliculasService.getPeliculas().subscribe(
       (response) => {
         this.peliculas = response;
@@ -32,12 +24,12 @@ export class ListarComponent implements OnInit {
     );
   }
 
-  getListaNombreGeneros(idGeneros: []): string {
-    let generos = "";
-    idGeneros.forEach((id: number) => {
-      generos += this.generos.find((generoObj: any) => generoObj.id == id).name + ", ";
+  getListaNombreGeneros(generos:any []): string {
+    let generosCadena = "";
+    generos.forEach((gen: any) => {
+      generosCadena += gen.name + ", ";
     });
-    return generos.slice(0, -2);
+    return generosCadena.slice(0, -2);
   }
 
   eliminarPelicula(id: number) {

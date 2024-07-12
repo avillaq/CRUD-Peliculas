@@ -41,7 +41,7 @@ export class EditarComponent implements OnInit{
           description: [response.description, Validators.required],
           image: [response.image, Validators.required],
           rating: [response.rating, Validators.required],
-          genres: [response.genres, Validators.required],
+          genres: [response.genres.map((gen: any) => gen.id), Validators.required],
           inTheaters: [response.inTheaters],
         });
         

@@ -9,9 +9,9 @@
             </p>
             <div
                 class="flex flex-wrap justify-start items-center p-1 border-b-2 border-gray-200 dark:border-gray-700 text-xs text-white font-medium">
-                @for (gen of getListaNombreGeneros(peli.genres); track $index) {
+                @for (gen of peli.genres; track $index) {
                 <span class="m-1 px-2 py-1 rounded bg-indigo-500">
-                    {{gen}}
+                    {{gen.name}}
                 </span>
                 }
 
